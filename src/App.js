@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import Header from './Header/Header';
+import EventGrid from '../src/EventGrid/EventGrid'
+import Toolbar from "./Toolbar/Toolbar";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    state = {
+        isGrid: false
+    };
+
+    toggleGridHandler = (previousState) => {
+        this.setState({isGrid: !previousState})
+    };
+
+
+    render() {
+        return (
+            <div className="App">
+                <Header/>
+                <Toolbar toggleGrid={()=>this.toggleGridHandler(this.state.isGrid)}/>
+                {this.state.isGrid ? <EventGrid/> : ""}
+            </div>
+        );
+    }
+
 }
 
 export default App;
